@@ -16,7 +16,7 @@ const Comments = () => {
 
   return comments.map((comment) => {
     return (
-      <div>
+      <div key={comment.comment_id}>
         <h2>Comment ID: {comment.comment_id}</h2>
         <h2>Author: {comment.author}</h2>
         <h2>Body: {comment.body}</h2>
