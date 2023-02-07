@@ -24,7 +24,7 @@ const SingleReview = () => {
       <h3>Review Body: "{reviews.review_body}"</h3>
       <h3>Votes: {reviews.votes}</h3>
       <h3>Created At: {reviews.created_at}</h3>
-      <Link to="/review/:reviewId/comments">
+      <Link to={`/review/${reviews.review_id}/comments`}>
         <h3>Click to see Comments</h3>
       </Link>
       <img src={reviews.review_img_url} alt="game"></img>
