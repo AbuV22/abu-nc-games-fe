@@ -9,6 +9,7 @@ const formatDate = (dateString) => {
 const SingleReview = () => {
   const { reviewId } = useParams();
   const [reviews, setReviews] = useState({});
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch(`https://abu-games.onrender.com/api/reviews/${reviewId}`)
       .then((res) => {
@@ -16,8 +17,12 @@ const SingleReview = () => {
       })
       .then((data) => {
         setReviews(data.reviews);
+        setLoading(false);
       });
   }, [reviewId]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
       <h1>Title: {reviews.title}</h1>

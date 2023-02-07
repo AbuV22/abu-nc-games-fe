@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 const ReviewList = ({ selectedCategory }) => {
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("https://abu-games.onrender.com/api/reviews")
       .then((res) => {
@@ -10,10 +11,12 @@ const ReviewList = ({ selectedCategory }) => {
       })
       .then((data) => {
         setReviews(data.reviews);
-        console.log(data.reviews);
+        setLoading(false);
       });
   }, []);
-
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <table id="table">
       <tbody>
