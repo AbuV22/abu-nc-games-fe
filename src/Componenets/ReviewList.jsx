@@ -10,21 +10,26 @@ const ReviewList = ({ selectedCategory }) => {
       })
       .then((data) => {
         setReviews(data.reviews);
+        console.log(data.reviews);
       });
   }, []);
 
   return (
     <table id="table">
       <tbody>
-        {reviews.map((review, index) => {
-          return (
-            <tr key={index}>
-              <td className="title">
-                <Link to={`/review/${review.review_id}`}>{review.title}</Link>
-              </td>
-            </tr>
-          );
-        })}
+        {reviews
+          // .filter((review) => {
+          //   review.category === selectedCategory || selectedCategory === "";
+          // })
+          .map((review, index) => {
+            return (
+              <tr key={index}>
+                <td className="title">
+                  <Link to={`/review/${review.review_id}`}>{review.title}</Link>
+                </td>
+              </tr>
+            );
+          })}
       </tbody>
     </table>
   );

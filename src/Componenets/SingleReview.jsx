@@ -2,6 +2,10 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString();
+};
 const SingleReview = () => {
   const { reviewId } = useParams();
   const [reviews, setReviews] = useState({});
@@ -23,7 +27,7 @@ const SingleReview = () => {
       <h3>Owner: {reviews.designer}</h3>
       <h3>Review Body: "{reviews.review_body}"</h3>
       <h3>Votes: {reviews.votes}</h3>
-      <h3>Created At: {reviews.created_at}</h3>
+      <h3>Created At: {formatDate(reviews.created_at)}</h3>
       <Link to={`/review/${reviews.review_id}/comments`}>
         <h3>Click to see Comments</h3>
       </Link>
