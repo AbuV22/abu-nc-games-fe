@@ -12,12 +12,12 @@ code {
     monospace;
 }
 
-#categories {
-  padding: 15px 30px;
-  color: black;
-  border: 2px solid black;
-  font-size: 20px;
-  border-radius: 10px;
-  text-align: center;
-  cursor: pointer;
+#table {
+  display: table-row;
+}
+
+.title {
+  display: table-cell;
+  padding: 10px;
+  border: 1px solid black;
 }

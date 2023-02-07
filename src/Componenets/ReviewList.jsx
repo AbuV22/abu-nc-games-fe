@@ -13,9 +13,19 @@ const ReviewList = ({ selectedCategory }) => {
       });
   }, []);
 
-  return reviews.map((review) => {
-    return <section key={review.id}>{review.title}</section>;
-  });
+  return (
+    <table id="table">
+      <tbody>
+        {reviews.map((review) => {
+          return (
+            <tr key={review.id}>
+              <td className="title">{review.title}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
 };
 
 export default ReviewList;

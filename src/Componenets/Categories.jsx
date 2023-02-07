@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
   useEffect(() => {
     fetch("https://abu-games.onrender.com/api/categories")
       .then((res) => {
@@ -12,14 +13,29 @@ const Categories = () => {
         setCategories(data.categories);
       });
   }, []);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Selected Category:", selectedCategory);
+  };
 
-  return categories.map((category) => {
-    return (
-      <section key={category.id}>
-        <button id="categories">{category.slug}</button>
-      </section>
-    );
-  });
+  return (
+    <form onSubmit={handleSubmit}>
+      <select
+        value={selectedCategory}
+        onChange={(event) => setSelectedCategory(event.target.value)}
+      >
+        <option value="">Select a Category</option>
+        {categories.map((category) => {
+          return (
+            <option key={category.id} value={category.slug}>
+              {category.slug}
+            </option>
+          );
+        })}
+      </select>
+      <button type="submit">Submit</button>
+    </form>
+  );
 };
 
 export default Categories;
