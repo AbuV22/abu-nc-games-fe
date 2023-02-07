@@ -5,6 +5,7 @@ import Header from "./Componenets/Header";
 import NavBar from "./Componenets/navBar";
 import Categories from "./Componenets/Categories";
 import SingleReview from "./Componenets/SingleReview";
+import Comments from "./Componenets/Comments";
 const App = () => {
   return (
     <div>
@@ -14,6 +15,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<ReviewList />} />
         <Route path="/review/:reviewId" element={<SingleReview />} />
+        <Route path="/review/:reviewId/comments" element={<Comments />} />
       </Routes>
     </div>
   );

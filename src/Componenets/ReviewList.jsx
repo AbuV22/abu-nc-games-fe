@@ -16,12 +16,12 @@ const ReviewList = ({ selectedCategory }) => {
   return (
     <table id="table">
       <tbody>
-        {reviews.map((review) => {
+        {reviews.map((review, index) => {
           return (
-            <tr key={review.id}>
-              <Link to={`/review/${review.review_id}`}>
-                <td className="title">{review.title}</td>
-              </Link>
+            <tr key={index}>
+              <td className="title">
+                <Link to={`/review/${review.review_id}`}>{review.title}</Link>
+              </td>
             </tr>
           );
         })}

@@ -25,9 +25,9 @@ const Categories = () => {
         onChange={(event) => setSelectedCategory(event.target.value)}
       >
         <option value="">Select a Category</option>
-        {categories.map((category) => {
+        {categories.map((category, index) => {
           return (
-            <option key={category.id} value={category.slug}>
+            <option key={index} value={category}>
               {category.slug}
             </option>
           );
