@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 const ReviewList = ({ selectedCategory }) => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
@@ -19,7 +19,9 @@ const ReviewList = ({ selectedCategory }) => {
         {reviews.map((review) => {
           return (
             <tr key={review.id}>
-              <td className="title">{review.title}</td>
+              <Link to={`/review/${review.review_id}`}>
+                <td className="title">{review.title}</td>
+              </Link>
             </tr>
           );
         })}
