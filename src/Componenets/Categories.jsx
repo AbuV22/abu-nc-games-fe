@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-const Categories = () => {
+const Categories = ({ handleCategorySelection }) => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   useEffect(() => {
@@ -15,7 +15,7 @@ const Categories = () => {
   }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Selected Category:", selectedCategory);
+    handleCategorySelection(selectedCategory);
   };
 
   return (
@@ -24,10 +24,10 @@ const Categories = () => {
         value={selectedCategory}
         onChange={(event) => setSelectedCategory(event.target.value)}
       >
-        <option value="">Select a Category</option>
+        <option value="">All Reviews</option>
         {categories.map((category, index) => {
           return (
-            <option key={index} value={category}>
+            <option key={index} value={category.slug}>
               {category.slug}
             </option>
           );

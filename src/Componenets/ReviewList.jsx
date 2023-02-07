@@ -18,9 +18,10 @@ const ReviewList = ({ selectedCategory }) => {
     <table id="table">
       <tbody>
         {reviews
-          // .filter((review) => {
-          //   review.category === selectedCategory || selectedCategory === "";
-          // })
+          .filter(
+            (review) =>
+              selectedCategory === "" || review.category === selectedCategory
+          )
           .map((review, index) => {
             return (
               <tr key={index}>
