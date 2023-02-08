@@ -1,9 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     fetch("https://abu-games.onrender.com/api/categories")
       .then((res) => {
@@ -15,7 +17,17 @@ const Categories = () => {
   }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Selected Category:", selectedCategory);
+    if (selectedCategory === "") {
+      navigate("/review");
+    } else {
+      navigate(`${selectedCategory}`);
+    }
+  };
+  const formatCategoryName = (name) => {
+    return name
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   };
 
   return (
@@ -24,11 +36,11 @@ const Categories = () => {
         value={selectedCategory}
         onChange={(event) => setSelectedCategory(event.target.value)}
       >
-        <option value="">Select a Category</option>
+        <option value="">All Reviews</option>
         {categories.map((category, index) => {
           return (
-            <option key={index} value={category}>
-              {category.slug}
+            <option key={index} value={category.slug}>
+              {formatCategoryName(category.slug)}
             </option>
           );
         })}
@@ -39,3 +51,5 @@ const Categories = () => {
 };
 
 export default Categories;
+
+//abu

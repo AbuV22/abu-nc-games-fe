@@ -1,8 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-const ReviewList = ({ selectedCategory }) => {
+import { Link, useParams } from "react-router-dom";
+const ReviewList = () => {
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { category } = useParams();
   useEffect(() => {
     fetch("https://abu-games.onrender.com/api/reviews")
       .then((res) => {
@@ -10,17 +12,19 @@ const ReviewList = ({ selectedCategory }) => {
       })
       .then((data) => {
         setReviews(data.reviews);
-        console.log(data.reviews);
+        setLoading(false);
       });
   }, []);
-
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <table id="table">
       <tbody>
         {reviews
-          // .filter((review) => {
-          //   review.category === selectedCategory || selectedCategory === "";
-          // })
+          .filter(
+            (review) => category === undefined || review.category === category
+          )
           .map((review, index) => {
             return (
               <tr key={index}>
