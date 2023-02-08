@@ -10,22 +10,24 @@ import Comments from "./Componenets/Comments";
 const App = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const handleCategorySelection = (selectedCategory) => {
-    setSelectedCategory(selectedCategory);
-  };
   return (
     <div>
       <Header />
       <NavBar />
-      <Categories handleCategorySelection={handleCategorySelection} />
+      <Categories setSelectedCategory={setSelectedCategory} />
       <Routes>
         <Route
-          path="/"
+          path="/review"
           element={<ReviewList selectedCategory={selectedCategory} />}
         />
         <Route path="/review/:reviewId" element={<SingleReview />} />
         <Route path="/review/:reviewId/comments" element={<Comments />} />
+        <Route
+          path="/:category"
+          element={<ReviewList selectedCategory={selectedCategory} />}
+        />
       </Routes>
+      1
     </div>
   );
 };

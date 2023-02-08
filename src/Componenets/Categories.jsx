@@ -1,9 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Categories = ({ handleCategorySelection }) => {
+const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     fetch("https://abu-games.onrender.com/api/categories")
       .then((res) => {
@@ -15,7 +17,17 @@ const Categories = ({ handleCategorySelection }) => {
   }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleCategorySelection(selectedCategory);
+    if (selectedCategory === "") {
+      navigate("/review");
+    } else {
+      navigate(`${selectedCategory}`);
+    }
+  };
+  const formatCategoryName = (name) => {
+    return name
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   };
 
   return (
@@ -28,7 +40,7 @@ const Categories = ({ handleCategorySelection }) => {
         {categories.map((category, index) => {
           return (
             <option key={index} value={category.slug}>
-              {category.slug}
+              {formatCategoryName(category.slug)}
             </option>
           );
         })}
