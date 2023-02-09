@@ -27,7 +27,6 @@ const App = () => {
           element={<ReviewList selectedCategory={selectedCategory} />}
         />
       </Routes>
-      1
     </div>
   );
 };

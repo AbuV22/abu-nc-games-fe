@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [localSelectedCategory, setLocalSelectedCategory] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     fetch("https://abu-games.onrender.com/api/categories")
@@ -17,10 +17,10 @@ const Categories = () => {
   }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (selectedCategory === "") {
+    if (localSelectedCategory === "") {
       navigate("/review");
     } else {
-      navigate(`${selectedCategory}`);
+      navigate(`${localSelectedCategory}`);
     }
   };
   const formatCategoryName = (name) => {
@@ -31,22 +31,25 @@ const Categories = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <select
-        value={selectedCategory}
-        onChange={(event) => setSelectedCategory(event.target.value)}
-      >
-        <option value="">All Reviews</option>
-        {categories.map((category, index) => {
-          return (
-            <option key={index} value={category.slug}>
-              {formatCategoryName(category.slug)}
-            </option>
-          );
-        })}
-      </select>
-      <button type="submit">Submit</button>
-    </form>
+    <>
+      <p>Filter By Categories:</p>
+      <form onSubmit={handleSubmit}>
+        <select
+          value={localSelectedCategory}
+          onChange={(event) => setLocalSelectedCategory(event.target.value)}
+        >
+          <option value="">All Reviews</option>
+          {categories.map((category, index) => {
+            return (
+              <option key={index} value={category.slug}>
+                {formatCategoryName(category.slug)}
+              </option>
+            );
+          })}
+        </select>
+        <button type="submit">Submit</button>
+      </form>
+    </>
   );
 };
 
